@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+    font-family: font1;
+    src: url("../font/Kanit/Kanit-Medium.ttf") format("opentype");
+  }
+  @font-face {
+    font-family: font2;
+    src: url("../font/Varela_Round/VarelaRound-Regular.ttf") format("opentype");
+  }
+  @font-face {
+    font-family: font3;
+    src: url("../font/CircularSpotifyText-Bold.otf") format("opentype");
+  }

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="icon/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="swiper/swiper-bundle.min.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <style>
+        *{
+            padding: 0;margin: 0;box-sizing: border-box;
+        } 
+
+        swiper-container {
+            width:90%;
+            height: 100%;
+            display: flex;
+            justify-content: start;
+       }
+
+        swiper-slide {
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* transform: translateX(-400px); */
+            z-index: 20;
+            border-radius: 20px;
+        }
+
+        swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        swiper-container {
+            width: 95%;
+            height: 250px;
+            margin: 20px auto;
+        
+        }
+    
+
+    </style>
+</head>
+<script src="swiper/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+<body class="text-white font-third">
+    <main id="main" class="w-[100%] h-[100vh] overflow-x-hidden overflow-y-hidden">
+        <section id="whole" class="w-full h-fit flex flex-wrap justify-center content-start relative">
+            <section id="firstsec" class="w-full h-[100vh] flex flex-wrap justify-between content-between bg-black p-4 relative">
+                
+                <!-- start sec1 -->
+                <div id="leftside" class="h-[84%] lg:h-[87%] w-[23%] flex flex-wrap justify-center content-between">
+                    <div class="w-full h-[29%] lg:h-[28%] rounded-xl bg-[#1a1a1a]">
+                        <button class="w-full flex justify-start items-center texr-[15px] p-1 lg:p-2 pt-5 cursor-pointer"><i class="bi bi-spotify text-[15px] lg:text-[30px] mx-1 lg:mx-3"></i></i>Spotify</button>
+                        <button id="home" class="w-full flex justify-start items-center texr-[15px] p-1 lg:p-2 cursor-pointer text-[#767676] hover:text-white "><i class="bi bi-house-door-fill text-[15px] lg:text-[25px] mx-1 lg:mx-3"></i>Home</button>
+                        <button id="search" class="w-full flex justify-start items-center texr-[15px] p-1 lg:p-2 cursor-pointer text-[#767676] hover:text-white "><i class="bi bi-search text-[15px] lg:text-[25px] mx-1 lg:mx-3"></i>Search</button>
+                    </div>
+                    <div class="w-full h-[70%] rounded-xl bg-[#1a1a1a] flex flex-wrap justify-start items-start px-2 relative">
+                        <button id="show_library" class="w-full flex justify-start items-center texr-[15px] p-1 lg:p-2 cursor-pointer text-[#767676] hover:text-white "><i class="bi bi-music-note-list text-[15px] lg:text-[25px] mx-1 lg:ml-3"></i>Library<i class="bi bi-plus-lg text-[20px] ml-3"></i></button>
+                        <div class="transition-all duration-700 w-full min-h-[80%] overflow-y-scroll flex flex-wrap justify-start content-start relative overflow-x-hidden ">
+                            <section id="library_storing" class=" w-full h-full  flex flex-wrap justify-start content-start absolute top-0 left-0 z-50">
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="rightside" class="h-[84%] lg:h-[87%]  w-[76%] flex flex-wrap justify-center content-between ">
+                    <div class="w-full h-[9%] lg:h-[10%] flex justify-between content-center items-center bg-[#1a1a1a] rounded-xl p-4">
+                        <div class="w-[40%] h-full flex justify-start items-center"><input id="searchbox" type="search" placeholder="search..." class="w-[350px] h-[50px] rounded-full bg-[#242424]  border-1 p-5"></div>
+                        <div class="h-full w-[50%] flex justify-end items-center">
+                            <button id="signup" class="text-[15px] font-bold w-[100px] h-[40px] cursor-pointer hover:scale-110 hover:font-semibold">Sign Up</button>
+                            <button id="login" class="text-[15px] font-bold w-[100px] h-[40px] bg-white text-black rounded-3xl cursor-pointer hover:scale-110 hover:font-semibold">Log In</button>
+                        </div>
+                    </div>
+                    <div id="music_box_main" class="relative w-[98%] h-[90%] lg:h-[87%] flex flex-wrap justify-center content-start bg-[#1a1a1a] rounded-xl overflow-y-scroll overflow-x-hidden py-10 ">
+                        <!--start playing page -->
+                        <section id="playingpage" class="bg-[#515844] w-[130%] h-full hidden absolute top-0 left-0 z-40  flex-wrap justify-start content-center overflow-hidden transition-all duration-700">
+                            <div class="w-[100%] h-[60%] flex justify-start pl-10 content-end items-end  my-10 bg-[#515844]">
+                                <figure id="fig" class="w-[250px] h-[250px] overflow-hidden  cursor-pointer shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+                                    <img id="pic" class="w-full h-full object-cover"  src="" alt="">
+                                </figure>
+                                
+                                <div class="w-[60%] h-[60%] flex flex-wrap justify-start content-center  ml-10">
+                                    <!-- <span class="w-full text-start text-white text-[20px] ">song</span> -->
+                                    <span class="namemusic w-full text-start text-white text-[80px] font-extrabold mt-5"></span>
+                                    <span class="namesinger w-full text-start text-gray-100 text-[20px] font-bold"></span>
+                                </div>
+                            </div>
+                            <div class="w-[100%] h-[40%] bg-gray flex justify-start items-start pl-10 py-10   bg-gradient-to-b from-[#1e201a] to-[#515844]">
+                                <button onclick="play_music()" class="relative w-[50px] h-[50px]  flex justify-center items-center">
+                                    <span  class="play_pause text-[50px] cursor-pointer hover:scale-110 transition-all duration-300"><i class="play bi bi-play-circle-fill text-[50px] cursor-pointer hover:scale-110 transition-all duration-300 text-[#1ed760] "></i></span>
+                                </button>
+                                <i class="like bi bi-heart-fill text-[50px]  cursor-pointer hover:scale-110 transition-all duration-300 flex justify-center items-center ml-2"></i>
+                            </div>
+
+                        </section>
+                        <!-- end playing page -->
+                        <!-- slider row 1 -->
+                        <swiper-container id="slider1" class="mySwiper "  slides-per-view="6" centered-slides="true" space-between="0" 
+                             navigation="true" >
+                            <swiper-slide class="flex justify-center ">
+                                <div  class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828] flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461] hover:.play_symbol-flex  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl relative"><img class="w-full h-full object-contain hover:scale-110 transition-all duration-500" src="img/shadmehr/1sh.jpg" alt="">
+                                        <i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i>
+                                    </figure>
+                                    <span class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Bi Tabi</span>
+                                    <span class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/delemansiastvali.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div  class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/shadmehr/2sh.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Zhina</span>
+                                    <span class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/zhina.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div  class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/shadmehr/3sh.png" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Pare Parvaz</span>
+                                    <span class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/pareparvaz.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/shadmehr/4sh.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Che Khabhayi</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/chekhabhayi.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/shadmehr/5sh.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Alamate Soal</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/alamtesoal.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/shadmehr/6sh.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Yek Kari Kon</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/yekarikon.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/shadmehr/7sh.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Rabeteh</span>
+                                    <span class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/rabeteh.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/shadmehr/8sh.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Mahal</span>
+                                    <span class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Shadmehr</span>
+                                    <audio src="audio/shadmehr/mahal.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                        </swiper-container>
+
+                        <!-- slider row 2 -->
+                        <swiper-container id="slider2" class="mySwiper" slides-per-view="4"  centered-slides="true" space-between="0" 
+                             navigation="true" >
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/1ebi.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Goriz</span>
+                                    <span class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/goriz.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/2ebi.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Poosteh Shir</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/poosteshir.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/3ebi.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Setare Haye Sorbi</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/setarehayesorbi.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/4ebi.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Jabeh Javaher</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/jabejavaher.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/5ebi.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Adat</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white  font-boldtext-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/adat.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/6ebi.webp" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Ba To</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/bato.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/7ebi.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Harighe Sabz</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/harighesbaz.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                            <swiper-slide class="flex justify-center">
+                                <div class="relative music_box w-[200px] h-[300px] rounded-xl bg-[#282828]  flex flex-wrap justify-center content-center p-2 hover:bg-[#83838461]  transition-all duration-500 cursor-pointer">
+                                    <i class="bi bi-spotify text-[12px] absolute top-[14%] left-[12%] text-white"></i>
+                                    <figure class="relative w-[90%] h-[60%] overflow-hidden cursor-pointer rounded-xl"><img class="w-full h-full object-cover hover:scale-110 transition-all duration-500" src="img/ebi/8ebi.jpg" alt=""><i class="play_symbol bi bi-play-circle-fill text-[60px] cursor-pointer  transition-all duration-300 text-[#1ed760] absolute right-[2%] bottom-[2%] hidden"></i></figure>
+                                    <span  class="musicname w-full flex justify-start items-center text-white font-bold text-[15px] pl-3 mt-3">Nafas Nafas</span>
+                                    <span  class="singername w-full flex justify-start items-center text-white font-bold text-[12px] pl-3">Ebi</span>
+                                    <audio src="audio/ebi/nafasnafas.mp3"></audio>
+                                </div>
+                            </swiper-slide>
+                        </swiper-container>
+                        <!-- sec2 -->
+                        <section class="w-full h-[170vh] lg:h-[60vh] flex flex-wrap justify-start content-center bg-red ml-10 ">
+                            <div class="w-full h-[70%] flex flex-wrap justify-center content-center">
+                                <div class="w-full lg:w-[20%] h-fit flex justify-start items-center p-4 flex-wrap">
+                                    <span class="flex w-full text-[20x] text-white justify-start p-2">Company</span>
+                                    <ul class="w-full flex flex-wrap justify-start content-start p-2">
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">About</a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">Jobs</a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">For the Record</a></li>
+                                    </ul>
+                                </div>
+                                <div class="w-full lg:w-[20%] h-fit flex justify-start items-center p-4  flex-wrap">
+                                    <span class="flex w-full text-[20px] text-white justify-start p-2">Communities</span>
+                                    <ul class="w-full flex flex-wrap justify-start content-start p-2">
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">For Artists</a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">Developers</a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">Advertising</a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">Investors</a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">Vendors</a></li>
+                                    </ul>
+                                </div>
+                                <div class="w-full lg:w-[20%]  flex justify-start items-center p-4  flex-wrap h-fit ">
+                                    <span class="flex w-full text-[20px] text-white justify-start p-2">Useful links</span>
+                                    <ul class="w-full flex flex-wrap justify-start content-start p-2">
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">Support</a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="">Free Mobile App</a></li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="w-full lg:w-[30%] h-fit flex justify-start items-center p-4   flex-wrap">
+                                    <span class="flex w-full text-[20px] text-white justify-start p-2">Contact Me</span>
+                                    <ul class="w-full flex flex-wrap justify-start content-start p-2">
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="mailto:farajikatayoon75@gmail.com"><i class="bi bi-envelope-fill"></i></a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="https://www.linkedin.com/in/katayoon-faraji-web-3b722b207"><i class="bi bi-linkedin"></i></a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="https://github.com/katayoon-faraji-web"><i class="bi bi-github"></i></a></li>
+                                        <li class="w-full text-[15px] text-[#767676] text-start flex justify-start items-center hover:text-white transition-all duration-300"><a href="https://instagram.com/katayoon_faraji_web"><i class="bi bi-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-wrap justify-between content-center items-center p-5 ">
+                                <ul class="w-full lg:w-[60%] h-full flex flex-wrap items-center justify-between ">
+                                    <li class="text-[#767676] w-full lg:w-fit"><a href="">Legal</a></li>
+                                    <li class="text-[#767676] w-full lg:w-fit"><a href="">Privacy Center</a></li>
+                                    <li class="text-[#767676] w-full lg:w-fit"><a href="">Privacy Policy</a></li>
+                                    <li class="text-[#767676] w-full lg:w-fit"><a href="">Cookie Settings</a></li>
+                                    <li class="text-[#767676] w-full lg:w-fit"><a href="">About Ads</a></li>
+                                    <li class="text-[#767676] w-full lg:w-fit"><a href="">Accessibility</a></li>
+                                </ul>
+                                <span class="w-full lg:w-[20%] h-full flex flex-wrap items-center justify-end ">© 2023 Spotify AB</span>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+
+                <div id="controlSection" class="w-full h-[15%] lg:h-[10%] bg-black rounded-xl flex flex-wrap justify-between px-2  items-center">
+                    <div class="h-full w-[35%] lg:w-[25%] flex flex-wrap justify-start content-center ">
+                        <figure class="w-[60px] lg:w-[80px] h-[60px] lg:h-[80px] overflow-hidden rounded-xl"><img class="w-full h-full  object-cover" src="" alt=""></figure>
+                        <div class=" lg:w-[30%] w-[40%] h-[60px] lg:h-[80px] flex flex-wrap justify-start content-center lg:ml-2 ">
+                            <span class="namesinger w-full h-[45%] text-[15px] text-start "></span>
+                            <span class="namemusic w-full h-[45%] text-[12px] text-start" ></span>
+                        </div>
+                        <i class="like bi bi-heart-fill text-[20px] cursor-pointer hover:scale-110 transition-all duration-300 flex justify-center items-center ml-2"></i>
+                    </div>
+                    <div class="h-full w-[60%] lg:w-[50%] flex flex-wrap justify-center content-center ">
+                        <div class="w-full h-[40px] flex justify-center items-center">
+                           <div class="lg:w-[30%] w-[60%] h-full flex justify-between items-center ">
+                            <i id="shuffle" class="bi bi-shuffle text-[20px] cursor-pointer hover:scale-110 transition-all duration-300"></i>
+                            <i id="previous" class=" bi bi-skip-backward-fill text-[20px] cursor-pointer hover:scale-110 transition-all duration-300"></i>
+                            <button  onclick="play_music()" class="relative w-[30px] h-[30px]  flex justify-center items-center playorpause">
+                                <span class="play_pause text-[30px] cursor-pointer hover:scale-110 transition-all duration-300"><i class="play bi bi-play-circle-fill text-[30px] cursor-pointer hover:scale-110 transition-all duration-300 text-white "></i></span>
+                            </button>
+                            <i id="next" class=" bi bi-skip-forward-fill text-[20px] cursor-pointer hover:scale-110 transition-all duration-300"></i>
+                            <i id="repeat" class=" bi bi-repeat text-[20px] cursor-pointer hover:scale-110 transition-all duration-300 "></i>
+                           </div>
+                        </div>
+                        <span class="line w-[700px] h-[5px]  bg-[#767676] cursor-pointer relative mt-4">
+                            <span id="fill_line" class="  h-full absolute top-0 left-0 bg-white w-0"></span>
+                        </span>
+                    </div>
+                    <div class="h-full w-[20%] justify-between items-center hidden lg:flex ">
+                        
+                        <i id="add_to_library" class="bi bi-plus-circle-fill text-[20px] text-white cursor-pointer hover:scale-110 transition-all duration-300"></i>
+                        <a href=""><i id="download" class="download bi bi-cloud-arrow-down-fill text-[20px] text-white cursor-pointer hover:scale-110 transition-all duration-300"></i></a>
+                        <span id="vol">
+                            <i  class="bi bi-volume-up-fill text-[20px] text-white cursor-pointer hover:scale-110 transition-all duration-300"></i></i>
+                        </span>
+                        <input id="volume_range" type="range" min="0" max="10" >
+                        
+                        
+                    </div>
+                    
+                </div>
+            </section>
+            <!-- end sec1 -->
+            
+            
+        </section>
+    </main>
+
+    <script>
+        arr_library = []
+        let localStorageContent = []
+        let db = []
+
+        let turn = 0
+        let currnt_time = 0
+        let music_duration = 0
+        let portion = 0
+        let _shuffle = 1
+        let turn_vol = 1
+        let volume_perc = 0
+        let turn_play_pause = 0
+        let turn_music = ''
+
+        
+        let _main = document.getElementById('main')
+        let home_btn = document.getElementById('home')
+        let search_btn = document.getElementById('search')
+        let searchbox = document.getElementById('searchbox')
+        let library_storing = document.getElementById('library_storing')
+        let show_library = document.getElementById('show_library')
+
+        // *****control section*****
+        let _line = document.querySelectorAll('.line')
+        let fill_line = document.getElementById('fill_line')
+        let _controlSection = document.getElementById('controlSection')
+        let _controlSection_img = document.querySelector('#controlSection img')
+        let singername = document.querySelectorAll('.namesinger')
+        let musicname = document.querySelectorAll('.namemusic')
+        let next_btn = document.getElementById('next')
+        let previous_btn = document.getElementById('previous')
+        let repeat_btn = document.getElementById('repeat')
+        let play_pause_btn = document.querySelectorAll('.play_pause')
+        let like_btn = document.querySelectorAll('.like')
+        let volume_range = document.getElementById('volume_range')
+        let download_btn = document.getElementById('download')
+        let shuffle_btn = document.getElementById('shuffle')
+        let playorpause_btn = document.querySelectorAll('.playorpause')
+        let vol_btn = document.getElementById('vol')
+        let add_to_library_btn = document.getElementById('add_to_library')
+
+
+        // *****playing page****
+        let playingpage = document.getElementById('playingpage')
+        let pic = document.getElementById('pic')
+        let fig = document.getElementById('fig')
+
+        // ****middle box****
+        let music_box_main = document.getElementById('music_box_main')
+        let all_musicboxs = document.querySelectorAll('.music_box')
+        let all_slides = document.querySelectorAll('swiper-slide')
+        let all_musics = document.querySelectorAll('.music_box audio')
+        let all_musics_in_slider1 = document.querySelectorAll('#slider1 audio')
+        let all_musics_in_slider2 = document.querySelectorAll('#slider2 audio')
+        let all_covers = document.querySelectorAll('.music_box img')
+        let all_singer_names = document.querySelectorAll('.singername')
+        let all_music_names = document.querySelectorAll('.musicname')
+        let all_music_play_symbol = document.querySelectorAll('.play_symbol')
+
+       
+     
+        all_musics.forEach((val)=>{
+            val.setAttribute('data-like','off')
+
+        })
+        all_musicboxs.forEach((val)=>{
+            val.style.borderRadius = '30px'
+
+        })
+        
+
+        function _reset(){
+            add_to_library_btn.style.color ='white'
+            all_musics.forEach((val)=>{
+                val.pause()
+                fill_line.style.widows = 0
+                turn_play_pause = 0
+                play_pause_btn.forEach((val ,i)=>{
+                    if(i==0){
+
+                        val.innerHTML = `<i class="play bi bi-play-circle-fill text-[50px] text-[#1ed760] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                    }
+                    else{
+                        val.innerHTML = `<i class="play bi bi-play-circle-fill text-[30px] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                    }
+                })
+            })
+        }
+
+        function calculate_current_time(){
+            setInterval(() => {
+                music_duration = all_musics[turn_music].duration
+                currnt_time = all_musics[turn_music].currentTime
+                portion = (currnt_time/music_duration)
+                fill_line.style.width = portion*(700) +'px'
+                if(currnt_time == all_musics[turn_music].duration){
+                    turn_play_pause = 0
+                    fill_line.style.width = 0
+                    play_pause_btn.forEach((val ,i)=>{
+                        if(i==0){
+
+                            val.innerHTML = `<i class="play bi bi-play-circle-fill text-[60px] text-[#1ed760] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                        }
+                        else{
+                            val.innerHTML = `<i class="play bi bi-play-circle-fill text-[30px] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                        }
+                    })
+                }
+            }, 1000);
+        }
+
+        turn_music = 0
+        coordinating_names_pic()
+
+        function coordinating_names_pic(){
+            _controlSection_img.src = all_covers[turn_music].src
+            pic.src = all_covers[turn_music].src
+            singername.forEach((val)=>{
+                val.innerHTML = all_singer_names[turn_music].innerHTML
+            })
+            musicname.forEach((val)=>{
+                val.innerHTML = all_music_names[turn_music].innerHTML
+            })
+        }
+
+        function play_music(){
+            if(turn_play_pause==0){
+                all_musics[turn_music].play()
+                play_pause_btn.forEach((val ,i)=>{
+                    if(i==0){
+
+                        val.innerHTML = `<i class="pause bi bi-pause-circle-fill text-[50px] text-[#1ed760] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                    }
+                    else{
+                        val.innerHTML = `<i class="pause bi bi-pause-circle-fill text-[30px] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                    }
+                })
+                calculate_current_time()
+                turn_play_pause = 1
+            }
+            else{
+                all_musics[turn_music].pause()
+                play_pause_btn.forEach((val ,i)=>{
+                    if(i==0){
+
+                        val.innerHTML = `<i class="play bi bi-play-circle-fill text-[50px] text-[#1ed760] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                    }
+                    else{
+                        val.innerHTML = `<i class="play bi bi-play-circle-fill text-[30px] cursor-pointer hover:scale-110 transition-all duration-300 ">`
+                    }
+                })
+                turn_play_pause = 0
+            }
+        }
+
+        repeat_btn.addEventListener('click',(e)=>{
+            if( all_musics[turn_music].getAttribute('loop')==null){
+                all_musics[turn_music].setAttribute('loop',true)
+                e.target.style. color = '#1ed760'
+            }
+            else{
+                all_musics[turn_music].removeAttribute('loop',true)
+                e.target.style.color = 'white'
+            }
+        })
+        
+        like_btn.forEach((val)=>{
+            val.addEventListener('click',()=>{
+                if(all_musics[turn_music].getAttribute('data-like')=='off'){
+                    val.style.color = '#1ed760'
+                    all_musics[turn_music].setAttribute('data-like','on')
+                }
+                else{
+                    val.style.color = 'white'
+                    all_musics[turn_music].setAttribute('data-like','off')
+                }
+            })
+        })
+
+        download_btn.addEventListener('click',()=>{
+            download_btn.parentElement.setAttribute('href',all_musics[turn_music].src)
+            download_btn.parentElement.setAttribute('download')
+            
+        })
+
+        shuffle_btn.addEventListener('click',(e)=>{
+            let d = all_musics[turn_music].duration
+            if(_shuffle==1){
+                e.target.style.color ='green'
+                setInterval(() => {
+                    
+                    if(currnt_time == all_musics[turn_music].duration){
+                        _reset()
+                        turn_music++
+                        all_slides[turn_music].click()
+                        
+                        play_music()
+                    }
+                }, 1000);
+                _shuffle = 0
+            }
+            else if(_shuffle==0){
+                e.target.style.color ='white'
+                _shuffle = 1
+                // setInterval(() => {
+                    
+                //     if(currnt_time == all_musics[turn_music].duration){
+                //         _reset()
+                //     }
+                // }, 1000);
+            }
+        })
+
+        next_btn.addEventListener('click',()=>{
+            _reset()
+            turn_play_pause = 0
+            if(turn_music<=all_musics.length-2){
+                turn_music++
+            }
+            else{
+                turn_music = all_musics.length-1
+            }
+            coordinating_names_pic()
+            play_music()
+
+        })
+      
+        previous_btn.addEventListener('click',()=>{
+            _reset()
+            turn_play_pause = 0
+            if(turn_music>=1){
+                turn_music--
+            }
+            else{
+                turn_music = 0
+            }
+            coordinating_names_pic()
+            play_music()
+        })
+
+        all_slides.forEach((val ,i1)=>{
+            val.addEventListener('click',(e)=>{
+                _reset()
+                turn_music = i1
+                coordinating_names_pic()
+                playingpage.style.display='flex'
+                music_box_main.style.overflowY = 'hidden'
+            })
+        })
+
+        all_slides.forEach((val ,i2)=>{
+            val.addEventListener('mouseenter',(e)=>{
+                all_music_play_symbol[i2].style.display ='flex'
+            })
+        })
+
+        all_slides.forEach((val ,i2)=>{
+            val.addEventListener('mouseleave',(e)=>{
+                all_music_play_symbol[i2].style.display ='none'
+            })
+        })
+        
+        _line.forEach((val)=>{
+            val.addEventListener('click',(e)=>{
+                let x = e.offsetX
+                fill_line.style.width = x +'px'
+                all_musics[turn_music].currentTime = ((x*(all_musics[turn_music].duration))/700)
+                all_musics[turn_music].play()
+                turn_play_pause = 1
+            })
+        })
+
+        home_btn.addEventListener('click',()=>{
+            playingpage.style.display = 'none'
+            music_box_main.style.overflowY = 'scroll'
+        })
+
+        search_btn.addEventListener('click',()=>{
+            searchbox.focus()
+            searchbox.style.border = '2px solid white'
+        })
+
+        volume_range.addEventListener('change', ()=>{
+            volume_perc = volume_range.value
+            if(volume_perc<=9){
+                x=Number('0.'+volume_perc)
+            }else{
+                volume_perc=1
+            }
+            all_musics[turn_music].volume = volume_perc;
+        })
+
+        vol.addEventListener('click',()=>{
+            if(turn_vol%2){
+                volume_perc = 0
+                vol.innerHTML = `<i class="bi bi-volume-mute text-[20px] text-white cursor-pointer hover:scale-110 transition-all duration-300"></i>`
+            }else{
+                volume_perc = .5
+                vol.innerHTML = `<i  class="bi bi-volume-up-fill text-[20px] text-white cursor-pointer hover:scale-110 transition-all duration-300"></i>` 
+            }
+            all_musics[turn_music].volume = volume_perc;
+            turn_vol++
+        })
+ 
+        // /slider/
+        const swiperEl = document.querySelectorAll('swiper-container');
+        const swiperslide = document.querySelectorAll('swiper-slide');
+        const swiper = swiperEl.swiper;
+        function check_slides_in_slider(){
+            if(_main.clientWidth <=768){
+                swiperEl.forEach((val)=>{
+                    val.setAttribute('slides-per-view','1')
+                })
+                swiperslide.forEach((val)=>{
+                    val.style.transform = 'translate(10px)'
+                })
+            }
+            else if(_main.clientWidth <=1024){
+                swiperEl.forEach((val)=>{
+                    val.setAttribute('slides-per-view','2')
+                })
+                swiperslide.forEach((val)=>{
+                    val.style.transform = 'translate(-150px)'
+                })
+            }
+            else{
+                swiperEl.forEach((val)=>{
+                    val.setAttribute('slides-per-view','5')
+                })
+                swiperslide.forEach((val)=>{
+                    val.style.transform = 'translate(-400px)'
+                })
+            }
+        }
+
+        // constructor
+        function obj_music(a,b,c,d){
+            this.nameOfMusic=a;
+            this.nameOfSinger=b;
+            this.MusicPic=c;
+            this.audiosource=d;
+        }
+
+        add_to_library_btn.addEventListener('click',(e)=>{
+            let a = all_music_names[turn_music].innerHTML
+            let b = all_singer_names[turn_music].innerHTML
+            let c = all_covers[turn_music].src
+            const o1 = new obj_music(a,b,c)
+            get_from_localStorage()
+            const r = db.some((val)=>{
+                return  val.nameOfMusic==o1.nameOfMusic
+            })
+            if(r==false){
+                db.push(o1)
+                e.target.style.color = 'green'
+            }
+            else{
+                e.target.style.color = 'white'
+            }
+            arr_library= []
+            db.forEach((vall)=>{
+                arr_library.push(vall)
+            })
+            set_to_local_storage()
+            fill_library_contents()
+        })
+        let show_close_library_turn = 1
+        show_library.addEventListener('click',()=>{
+            if(show_close_library_turn%2){
+                get_from_localStorage()
+                db.forEach((vall)=>{
+                    arr_library.push(vall)
+                })
+                fill_library_contents()
+                library_storing.parentElement.style.minHeight = '80%'
+               
+            }
+            else{
+                library_storing.parentElement.style.minHeight = 0
+            }
+            show_close_library_turn++
+            
+        })
+
+        function _remove_from_library(e) {
+            e.target.parentElement.parentElement.remove()
+            get_from_localStorage()
+            for(ind in db){
+                let childs = e.target.parentElement.previousElementSibling.children
+                if(db[ind].nameOfMusic== childs[0].innerHTML){
+                    db.splice(ind,1)
+                    arr_library.splice(ind,1)
+                }
+            } 
+            set_to_local_storage()
+        }
+
+        
+        function set_to_local_storage(){
+            localStorage.setItem('store',JSON.stringify(db))
+        }
+      
+        function get_from_localStorage(){
+            let c = localStorage.getItem('store')
+            if(c!=null){
+                localStorageContent =  JSON.parse((localStorage.getItem('store')))
+                db = []
+                localStorageContent.forEach((val)=>{
+                    db.push(val)
+                })
+            }
+        }
+
+        function playlist_func(e) {
+            all_music_names.forEach((val , i)=>{
+                if(val.innerHTML== e.target.innerHTML){
+                    all_slides[i].click()
+                }
+            })
+        }
+
+        function fill_library_contents(){
+            while(library_storing.firstChild){
+                library_storing.removeChild(library_storing.lastChild)
+            }
+            arr_library.forEach((val)=>{
+                let _div = document.createElement('div')
+                _div.innerHTML  = `<div  class="flex justify-center items-center h-[80px] px-2 w-full my-1">
+                                    <figure class="w-[70px] h-[70px] overflow-hidden shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]"><img  class="w-full h-full object-cover" src="${val.MusicPic}" alt=""></figure>
+                                    <div class="w-[180px] h-[60px] flex flex-wrap justify-start content-center lg:ml-2 ">
+                                        <span onclick='playlist_func(event)' class="namemusic w-full h-[40%] text-[15px] text-start cursor-pointer hidden lg:flex" >${val.nameOfMusic}</span>
+                                        <span class="namesinger w-full h-[40%] text-[12px] text-start  hidden lg:flex">${val.nameOfSinger}</span>
+                                    </div>
+                                    <div class="w-[40px] flex justify-center items-center h-full ">
+                                        <i onclick='_remove_from_library(event)' class="remove_from_library cursor-pointer bi bi-trash3-fill flex w-full justify-center text-[15px] "></i>
+                                    </div>
+                                    
+                                </div>`
+                
+                library_storing.appendChild(_div)
+            })
+        }
+
+        check_slides_in_slider()
+        setInterval(check_slides_in_slider, 1000);
+        window.addEventListener('resize',()=>{
+            check_slides_in_slider()
+        })
+        
+    </script>
+    
+</body>
+</html>
