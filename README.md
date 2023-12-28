@@ -1,5 +1,5 @@
 # project12-musicPlayer
-- [Demo Project](https://katayoon-faraji-web.github.io/trick32-XOgame/)
+- [Demo Project](https://katayoon-faraji-web.github.io/project12-musicPlayer/)
 
 - Developed by katayoon faraji
 
